@@ -1,0 +1,57 @@
+.main {
+    margin: 3rem 3rem;
+    background: transparent;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 3rem;
+    column-gap: 3rem;
+    border-radius: 0.5rem;
+    align-content: center;
+
+    grid-template-areas: "player1 board player2";
+
+    @include breakpoint(lap) {
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas:
+            "board player1"
+            "board player2";
+    }
+
+    @include breakpoint(tab-land) {
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas:
+            ". board board ."
+            "player1 player1 player2 player2";
+    }
+
+    @include breakpoint(tab-port) {
+        grid-template-rows: repeat(7, 1fr);
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-areas:
+            ". board board board board ."
+            ". board board board board ."
+            ". board board board board ."
+            ". player1 player1 player1 player1 ."
+            ". player1 player1 player1 player1 ."
+            ". player2 player2 player2 player2 ."
+            ". player2 player2 player2 player2 .";
+    }
+
+    @include breakpoint(phone) {
+        margin: 3rem 2rem;
+        grid-template-rows: repeat(7, 1fr);
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "board"
+            "board"
+            "board"
+            "player1"
+            "player1"
+            "player2"
+            "player2";
+    }
+}
