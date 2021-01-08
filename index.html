@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TIC TAC TOE</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link
+            rel="shortcut icon"
+            href="icons/favicon-32x32.png"
+            type="image/x-icon"
+        />
+    </head>
+    <body>
+        <div class="splash-screen">
+            <div class="splash-screen__text">
+                <p class="text">
+                    <span class="title">
+                        <span class="tic">TIC</span>
+                        <span class="tac">TAC</span>
+                        <span class="toe">TOE</span>
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="alert-bg">
+            <div class="alert alert-info">
+                <p>PLAYER 1 WINS</p>
+                <button onclick="closeInfoAlert()">NEXT GAME</button>
+            </div>
+        </div>
+        <header class="header">
+            <h1 class="header__title">Tic Tac Toe</h1>
+        </header>
+        <div class="switch">
+            <div class="player-1__side side player-turn">
+                <span class="name">player 1</span>&nbsp; (<span class="symbol"
+                    >X</span
+                >)
+            </div>
+            <div class="player-2__side side">
+                <span class="name">player 2</span>&nbsp; (<span class="symbol"
+                    >O</span
+                >)
+            </div>
+        </div>
+        <main class="main">
+            <div class="board">
+                <div class="board__row">
+                    <div class="board__square"></div>
+                    <div class="board__square"></div>
+                    <div class="board__square"></div>
+                </div>
+                <div class="board__row">
+                    <div class="board__square"></div>
+                    <div class="board__square"></div>
+                    <div class="board__square"></div>
+                </div>
+                <div class="board__row">
+                    <div class="board__square"></div>
+                    <div class="board__square"></div>
+                    <div class="board__square"></div>
+                </div>
+            </div>
+            <div class="player player-1 turn">
+                <div class="player__name">
+                    <img class="edit" src="icons/edit.svg" alt="edit icon" />
+                    <span>Player 1</span>
+                    <span class="symbol-box">
+                        ( <span class="symbol">X</span> )
+                    </span>
+                </div>
+                <div class="player__score">
+                    <span>0</span>
+                </div>
+            </div>
+            <div class="player player-2">
+                <div class="player__name">
+                    <img class="edit" src="icons/edit.svg" alt="edit icon" />
+                    <span>Player 2</span>
+                    <span class="symbol-box">
+                        ( <span class="symbol">O</span> )
+                    </span>
+                </div>
+                <div class="player__score">
+                    <span>0</span>
+                </div>
+            </div>
+        </main>
+        <div class="menu">
+            <button onclick="resetCurrentGame()">CLEAR</button>
+            <button onclick="resetGame()">RESET</button>
+        </div>
+        <script src="js/script.js"></script>
+    </body>
+</html>
