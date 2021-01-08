@@ -4,6 +4,7 @@ const board = document.querySelector(".board");
 const squares = document.querySelectorAll(".board__square");
 const alertBG = document.querySelector(".alert-bg");
 const alertInfo = document.querySelector(".alert-info");
+const turnSwitch = document.querySelector(".switch");
 
 resizeBoard();
 
@@ -15,7 +16,7 @@ function resizeBoard() {
 }
 
 class Player {
-    constructor(playerDiv, firstPlayer) {
+    constructor(playerDiv, firstPlayer, turnSwitchKey) {
         this.playerDiv = playerDiv;
         this.nameBox = playerDiv.querySelector(".player__name span");
         this.name = this.nameBox.textContent.toUpperCase();
@@ -25,12 +26,26 @@ class Player {
         this.symbolBox = this.playerDiv.querySelector(".symbol");
         this.symbol = this.symbolBox.textContent;
         this.firstPlayerInPrevGame = firstPlayer;
+        this.switchKey = turnSwitchKey;
+        this.switchKey.querySelector(".name").textContent = this.name;
+        this.switchKey.querySelector(".symbol").textContent = this.symbol;
     }
 }
 
 const localStorage = window.localStorage;
-var player1 = new Player(document.querySelector(".player-1"), false);
-var player2 = new Player(document.querySelector(".player-2"), true);
+
+var player1 = new Player(
+    document.querySelector(".player-1"),
+    false,
+    turnSwitch.querySelector(".player-1__side")
+);
+
+var player2 = new Player(
+    document.querySelector(".player-2"),
+    true,
+    turnSwitch.querySelector(".player-2__side")
+);
+
 var isPlayer1Turn = true;
 
 if (localStorage.getItem("player1_name") != null) {
@@ -75,9 +90,14 @@ function updatePage() {
     player1.nameBox.textContent = player1.name;
     player1.scoreBox.textContent = player1.score;
     player1.symbolBox.textContent = player1.symbol;
+    player1.switchKey.querySelector(".name").textContent = player1.name;
+    player1.switchKey.querySelector(".symbol").textContent = player1.symbol;
+
     player2.nameBox.textContent = player2.name;
     player2.scoreBox.textContent = player2.score;
     player2.symbolBox.textContent = player2.symbol;
+    player2.switchKey.querySelector(".name").textContent = player2.name;
+    player2.switchKey.querySelector(".symbol").textContent = player2.symbol;
 }
 
 player1.editButton.addEventListener("click", function () {
@@ -88,8 +108,9 @@ player2.editButton.addEventListener("click", function () {
 });
 
 function updateName(player) {
-    player.name = prompt("Enter player name:").toUpperCase();
+    player.name = prompt("Enter player name:").substring(0, 8).toUpperCase();
     player.nameBox.textContent = player.name;
+    player.switchKey.querySelector(".name").textContent = player.name;
     storeValues();
 }
 
@@ -162,9 +183,13 @@ function switchTurns(player1turn) {
     if (player1turn) {
         player1.playerDiv.classList.add("turn");
         player2.playerDiv.classList.remove("turn");
+        player1.switchKey.classList.add("player-turn");
+        player2.switchKey.classList.remove("player-turn");
     } else {
         player1.playerDiv.classList.remove("turn");
         player2.playerDiv.classList.add("turn");
+        player1.switchKey.classList.remove("player-turn");
+        player2.switchKey.classList.add("player-turn");
     }
 }
 
@@ -194,7 +219,9 @@ function exchangeSymbols() {
     player1.symbol = player2.symbol;
     player2.symbol = temp;
     player1.symbolBox.textContent = player1.symbol;
+    player1.switchKey.querySelector(".symbol").textContent = player1.symbol;
     player2.symbolBox.textContent = player2.symbol;
+    player2.switchKey.querySelector(".symbol").textContent = player2.symbol;
 }
 
 function showInfoAlert(str) {
@@ -225,6 +252,7 @@ function resetGame() {
     player2.symbol = "O";
     player1.firstPlayerInPrevGame = false;
     player2.firstPlayerInPrevGame = true;
+    clearBoard();
     updatePage();
     storeValues();
 }
